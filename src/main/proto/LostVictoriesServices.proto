@@ -10,6 +10,13 @@ message Vector {
     float z = 3;
 }
 
+message Quaternion {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+    float w = 4;
+}
+
 enum Country {
     GERMAN = 0;
     AMERICAN = 1;
@@ -89,4 +96,161 @@ message CharacterMessage {
     int64 creationTime = 24;
     bool busy = 25;
     bool attacking = 26;
+}
+
+enum CaptureStatus{
+    CAPTURING = 0;
+    NONE = 1;
+    CAPTURED = 2;
+    DECAPTURING = 3;
+}
+
+message AchievementStatus{
+    string achivementStatusText = 1;
+    int32 achivementTotal = 2;
+    int32 achivementCurrent = 3;
+    int64 sentTime = 4;
+}
+
+message UnClaimedEquipmentMessage{
+    bytes id = 1;
+    int64 version = 2;
+    Weapon weapon = 3;
+    Vector location = 4;
+    Vector rotation = 5;
+}
+
+message GameStatistics{
+    int32 blueHouses = 1;
+    int32 redHouses = 2;
+    int32 blueVictoryPoints = 3;
+    int32 redVictoryPoints = 4;
+    int32 avatarRespawnEstimate = 5;
+}
+
+message HouseMessage{
+    bytes id = 1;
+    string type = 2;
+    Vector location = 3;
+    Quaternion rotation = 4;
+    Country owner = 5;
+    Country contestingOwner = 6;
+    CaptureStatus captureStatus = 7;
+    int64 statusChangeTime = 8;
+}
+
+message TreeMessage{
+    bytes id = 1;
+    Vector location = 2;
+    string type = 3;
+    bool standing = 4;
+}
+
+message TreeGroupMessage{
+    bytes id = 1;
+    Vector location = 2;
+    repeated TreeMessage trees = 3;
+}
+
+message AddObjectiveRequest {
+    bytes clientID = 1;
+    bytes characterId = 2;
+    bytes identity = 3;
+    string objectives = 4;
+}
+
+message BoardVehicleRequest{
+    bytes clientID = 1;
+    bytes vehicleID = 2;
+    bytes characterID = 3;
+}
+
+message CharacterStatusResponse{
+    CharacterMessage unit = 1;
+}
+
+message CheckoutScreenRequest{
+    bytes clientID = 1;
+    bytes avatar = 2;
+}
+
+message DeathNotificationRequest{
+    bytes clientID = 1;
+    bytes killer = 2;
+    bytes victim = 3;
+}
+
+message DisembarkPassengersRequest{
+    bytes clientID = 1;
+    bytes vehicleID = 2;
+}
+
+message EquipmentCollectionRequest{
+    bytes clientID = 1;
+    bytes equipmentID = 2;
+    bytes characterID = 3;
+}
+
+message EquipmentStatusResponse{
+    repeated UnClaimedEquipmentMessage unClaimedEquipment = 1;
+}
+
+message GameStatsResponse{
+    repeated string messages = 1;
+    GameStatistics gameStatistics = 2;
+    AchievementStatus achivementStatus = 3;
+}
+
+message HouseStatusResponse{
+    repeated HouseMessage allHouses = 1;
+}
+
+message PassengerDeathNotificationRequest{
+    bytes clientID = 1;
+    bytes killer = 2;
+    bytes victim = 3;
+}
+
+message RelatedCharacterStatusResponse{
+    CharacterMessage unit = 1;
+}
+
+message TreeStatusResponse{
+    repeated TreeGroupMessage allTrees = 1;
+}
+
+message UpdateCharactersRequest{
+    bytes clientID = 1;
+    CharacterMessage character = 2;
+    bytes avatar = 3;
+    int64 clientStartTime = 4;
+}
+
+message LostVictoryMessage{
+    CharacterStatusResponse characterStatusResponse = 1;
+    RelatedCharacterStatusResponse relatedCharacterStatusResponse = 2;
+    HouseStatusResponse houseStatusResponse = 3;
+    TreeStatusResponse treeStatusResponse = 4;
+    GameStatsResponse gameStatsResponse = 5;
+    EquipmentStatusResponse equipmentStatusResponse = 6;
+}
+
+service LostVictoriesServer {
+
+    rpc checkoutSceen(CheckoutScreenRequest) returns (stream LostVictoryMessage);
+
+    rpc updateLocalCharacters(stream UpdateCharactersRequest) returns (stream LostVictoryMessage);
+
+    rpc deathNotification(DeathNotificationRequest) returns (LostVictoryMessage);
+
+    rpc gunnerDeathNotification(PassengerDeathNotificationRequest) returns (LostVictoryMessage);
+
+    rpc addObjective(AddObjectiveRequest) returns (LostVictoryMessage);
+
+    rpc requestEquipmentCollection(EquipmentCollectionRequest) returns (LostVictoryMessage);
+
+    rpc boardVehicle(BoardVehicleRequest) returns (LostVictoryMessage);
+
+    rpc disembarkPassengers(DisembarkPassengersRequest) returns (LostVictoryMessage);
+
 }
