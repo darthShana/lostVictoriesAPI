@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package com.lostVictories.api;
+
+option java_multiple_files = true;
+
+message Vector {
+    float x = 1;
+    float y = 2;
+    float z = 3;
+}
+
+enum Country {
+    GERMAN = 0;
+    AMERICAN = 1;
+}
+
+enum Weapon {
+    RIFLE = 0;
+    MG42 = 1;
+    MORTAR = 2;
+    CANNON = 3;
+}
+
+enum RankMessage {
+    COLONEL = 0;
+    LIEUTENANT = 1;
+    CADET_CORPORAL = 2;
+    PRIVATE = 3;
+}
+
+enum CharacterType {
+    ARMORED_CAR = 0;
+    ANTI_TANK_GUN = 1;
+    SOLDIER = 2;
+    HALF_TRACK = 3;
+    PANZER4 = 4;
+    AVATAR = 5;
+}
+
+message Action {
+    enum ActionType {
+        CROUCH = 0;
+        IDLE = 1;
+        MANUAL_CONTROL = 2;
+        MOVE = 3;
+        SETUP_WEAPON = 4;
+        SHOOT = 5;
+    }
+    ActionType actionType = 1;
+    string gear = 2;
+    string steering = 3;
+    int64 shootTime = 4;
+    repeated Vector targets = 5;
+}
+
+enum SquadType {
+    ANTI_TANK_GUN_SQUAD = 0;
+    ARMORED_VEHICLE_SQUAD = 1;
+    MORTAR_TEAM_SQUAD = 2;
+    MG42_TEAM_SQUAD = 3;
+    RIFLE_TEAM_SQUAD = 4;
+}
+
+message CharacterMessage {
+    bytes id = 1;
+    bytes userID = 2;
+    Vector location = 3;
+    Country country = 4;
+    Weapon weapon = 5;
+    RankMessage rank = 6;
+    bytes commandingOfficer = 7;
+    bytes boardedVehicle = 8;
+    repeated bytes unitsUnderCommand = 9;
+    repeated bytes passengers = 10;
+    bytes checkoutClient = 11;
+    int64 checkoutTime = 12;
+    CharacterType type = 13;
+    Vector orientation = 14;
+    repeated Action actions = 15;
+    map<string, string> objectives = 16;
+    repeated bytes completedObjectives = 17;
+    bool dead = 18;
+    bool engineDamaged = 19;
+    int64 timeOfDeath = 20;
+    int64 version = 21;
+    int32 killCount = 22;
+    SquadType squadType = 23;
+    int64 creationTime = 24;
+    bool busy = 25;
+    bool attacking = 26;
+}
