@@ -156,7 +156,7 @@ message AddObjectiveRequest {
     bytes clientID = 1;
     bytes characterId = 2;
     bytes identity = 3;
-    string objectives = 4;
+    string objective = 4;
 }
 
 message BoardVehicleRequest{
@@ -192,7 +192,7 @@ message EquipmentCollectionRequest{
 }
 
 message EquipmentStatusResponse{
-    repeated UnClaimedEquipmentMessage unClaimedEquipment = 1;
+    UnClaimedEquipmentMessage unClaimedEquipment = 1;
 }
 
 message GameStatsResponse{
@@ -202,7 +202,7 @@ message GameStatsResponse{
 }
 
 message HouseStatusResponse{
-    repeated HouseMessage allHouses = 1;
+    HouseMessage house = 1;
 }
 
 message PassengerDeathNotificationRequest{
@@ -216,7 +216,7 @@ message RelatedCharacterStatusResponse{
 }
 
 message TreeStatusResponse{
-    repeated TreeGroupMessage allTrees = 1;
+    TreeGroupMessage treeGroup = 1;
 }
 
 message UpdateCharactersRequest{
