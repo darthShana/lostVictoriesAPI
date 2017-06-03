@@ -59,7 +59,6 @@ message Action {
     string steering = 3;
     int64 shootTime = 4;
     repeated Vector targets = 5;
-    int64 moveTime = 6;
 }
 
 enum SquadType {
