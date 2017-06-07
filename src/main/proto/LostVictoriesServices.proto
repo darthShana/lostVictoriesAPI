@@ -43,6 +43,7 @@ enum CharacterType {
     HALF_TRACK = 3;
     PANZER4 = 4;
     AVATAR = 5;
+    M4SHERMAN = 6;
 }
 
 message Action {
