@@ -18,8 +18,9 @@ message Quaternion {
 }
 
 enum Country {
-    GERMAN = 0;
-    AMERICAN = 1;
+    NEUTRAL = 0;
+    GERMAN = 1;
+    AMERICAN = 2;
 }
 
 enum Weapon {
