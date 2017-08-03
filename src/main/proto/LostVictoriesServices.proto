@@ -28,6 +28,7 @@ enum Weapon {
     MG42 = 1;
     MORTAR = 2;
     CANNON = 3;
+    BAZOOKA = 4;
 }
 
 enum RankMessage {
