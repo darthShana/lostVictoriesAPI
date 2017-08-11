@@ -238,6 +238,12 @@ message LostVictoryMessage{
     EquipmentStatusResponse equipmentStatusResponse = 6;
 }
 
+message PlayerDetails{
+    string playerID = 1;
+    string characterID = 2;
+    Country country = 3;
+}
+
 service LostVictoriesServer {
 
     rpc checkoutSceen(CheckoutScreenRequest) returns (stream LostVictoryMessage);
@@ -255,5 +261,7 @@ service LostVictoriesServer {
     rpc boardVehicle(BoardVehicleRequest) returns (LostVictoryMessage);
 
     rpc disembarkPassengers(DisembarkPassengersRequest) returns (LostVictoryMessage);
+
+    rpc getPlayerDetails(PlayerDetails) returns (PlayerDetails);
 
 }
