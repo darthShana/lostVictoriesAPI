@@ -170,6 +170,7 @@ message BoardVehicleRequest{
 
 message CharacterStatusResponse{
     CharacterMessage unit = 1;
+    int32 backoff = 2;
 }
 
 message CheckoutScreenRequest{
@@ -238,6 +239,11 @@ message LostVictoryMessage{
     EquipmentStatusResponse equipmentStatusResponse = 6;
 }
 
+message JoinRequest{
+    string userID = 1;
+    string country = 2;
+    string characterID = 3;
+}
 
 service LostVictoriesServer {
 
@@ -256,5 +262,7 @@ service LostVictoriesServer {
     rpc boardVehicle(BoardVehicleRequest) returns (LostVictoryMessage);
 
     rpc disembarkPassengers(DisembarkPassengersRequest) returns (LostVictoryMessage);
+
+    rpc joinGame(JoinRequest) returns (JoinRequest);
 
 }
