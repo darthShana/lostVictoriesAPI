@@ -242,6 +242,9 @@ message LostVictoryMessage{
 message JoinRequest{
     string userID = 1;
     string country = 2;
+}
+
+message JoinResponse{
     string characterID = 3;
 }
 
@@ -263,6 +266,6 @@ service LostVictoriesServer {
 
     rpc disembarkPassengers(DisembarkPassengersRequest) returns (LostVictoryMessage);
 
-    rpc joinGame(JoinRequest) returns (JoinRequest);
+    rpc joinGame(JoinRequest) returns (JoinResponse);
 
 }
