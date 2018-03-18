@@ -205,9 +205,6 @@ message GameStatsResponse{
     AchievementStatus achivementStatus = 3;
 }
 
-message HouseStatusResponse{
-    HouseMessage house = 1;
-}
 
 message PassengerDeathNotificationRequest{
     bytes clientID = 1;
@@ -219,10 +216,6 @@ message RelatedCharacterStatusResponse{
     CharacterMessage unit = 1;
 }
 
-message TreeStatusResponse{
-    TreeGroupMessage treeGroup = 1;
-}
-
 message UpdateCharactersRequest{
     bytes clientID = 1;
     CharacterMessage character = 2;
@@ -230,13 +223,20 @@ message UpdateCharactersRequest{
     int64 clientStartTime = 4;
 }
 
+message RegisterClientRequest{
+    bytes clientID = 1;
+}
+
 message LostVictoryMessage{
     CharacterStatusResponse characterStatusResponse = 1;
     RelatedCharacterStatusResponse relatedCharacterStatusResponse = 2;
-    HouseStatusResponse houseStatusResponse = 3;
-    TreeStatusResponse treeStatusResponse = 4;
-    GameStatsResponse gameStatsResponse = 5;
-    EquipmentStatusResponse equipmentStatusResponse = 6;
+}
+
+message LostVictoryStatusMessage{
+    GameStatsResponse gameStatsResponse = 1;
+    HouseMessage houseStatusResponse = 2;
+    EquipmentStatusResponse equipmentStatusResponse = 3;
+    TreeGroupMessage treeStatusResponse = 4;
 }
 
 message JoinRequest{
@@ -248,11 +248,21 @@ message JoinResponse{
     string characterID = 3;
 }
 
+message LostVictoryCheckout{
+    repeated CharacterMessage characters = 1;
+    repeated CharacterMessage relatedCharacters = 2;
+    repeated UnClaimedEquipmentMessage equipment = 3;
+    repeated HouseMessage houses = 4;
+    repeated TreeGroupMessage trees = 5;
+}
+
 service LostVictoriesServer {
 
-    rpc checkoutSceen(CheckoutScreenRequest) returns (stream LostVictoryMessage);
+    rpc checkoutSceen(CheckoutScreenRequest) returns (LostVictoryCheckout);
 
     rpc updateLocalCharacters(stream UpdateCharactersRequest) returns (stream LostVictoryMessage);
+
+    rpc registerClient(stream RegisterClientRequest) returns (stream LostVictoryStatusMessage);
 
     rpc deathNotification(DeathNotificationRequest) returns (LostVictoryMessage);
 
