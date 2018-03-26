@@ -142,6 +142,13 @@ message HouseMessage{
     int64 statusChangeTime = 8;
 }
 
+message BunkerMessage{
+    bytes id = 1;
+    string type = 2;
+    Vector location = 3;
+    Quaternion rotation = 4;
+}
+
 message TreeMessage{
     bytes id = 1;
     Vector location = 2;
@@ -253,7 +260,8 @@ message LostVictoryCheckout{
     repeated CharacterMessage relatedCharacters = 2;
     repeated UnClaimedEquipmentMessage equipment = 3;
     repeated HouseMessage houses = 4;
-    repeated TreeGroupMessage trees = 5;
+    repeated BunkerMessage bunkers = 5;
+    repeated TreeGroupMessage trees = 6;
 }
 
 service LostVictoriesServer {
