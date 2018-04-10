@@ -70,6 +70,8 @@ enum SquadType {
     MORTAR_TEAM_SQUAD = 2;
     MG42_TEAM_SQUAD = 3;
     RIFLE_TEAM_SQUAD = 4;
+    BAZOOKA_TEAM = 5;
+    TANK_SQUAD = 6;
 }
 
 message CharacterMessage {
