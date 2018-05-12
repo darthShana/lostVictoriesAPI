@@ -137,11 +137,12 @@ message HouseMessage{
     bytes id = 1;
     string type = 2;
     Vector location = 3;
-    Quaternion rotation = 4;
-    Country owner = 5;
-    Country contestingOwner = 6;
-    CaptureStatus captureStatus = 7;
-    int64 statusChangeTime = 8;
+    Vector scale = 4;
+    Quaternion rotation = 5;
+    Country owner = 6;
+    Country contestingOwner = 7;
+    CaptureStatus captureStatus = 8;
+    int64 statusChangeTime = 9;
 }
 
 message BunkerMessage{
