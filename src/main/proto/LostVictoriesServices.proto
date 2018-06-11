@@ -165,6 +165,12 @@ message TreeGroupMessage{
     repeated TreeMessage trees = 3;
 }
 
+message SectorMessage {
+    bytes sectorID = 1;
+    repeated bytes houses = 2;
+    repeated bytes defences = 3;
+}
+
 message AddObjectiveRequest {
     bytes clientID = 1;
     bytes characterId = 2;
@@ -265,6 +271,7 @@ message LostVictoryCheckout{
     repeated HouseMessage houses = 4;
     repeated BunkerMessage bunkers = 5;
     repeated TreeGroupMessage trees = 6;
+    repeated SectorMessage sectors = 7;
 }
 
 service LostVictoriesServer {
