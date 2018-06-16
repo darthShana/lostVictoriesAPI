@@ -165,10 +165,18 @@ message TreeGroupMessage{
     repeated TreeMessage trees = 3;
 }
 
+message SectorRectangle{
+    int32 x = 1;
+    int32 y = 2;
+    int32 width = 3;
+    int32 height = 4;
+}
+
 message SectorMessage {
     bytes sectorID = 1;
     repeated bytes houses = 2;
     repeated bytes defences = 3;
+    repeated SectorRectangle rectangles = 4;
 }
 
 message AddObjectiveRequest {
